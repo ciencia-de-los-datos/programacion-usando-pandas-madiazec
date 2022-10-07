@@ -22,7 +22,9 @@ def pregunta_01():
     40
 
     """
-    return
+    cantidad = tbl0.shape[0]
+
+    return cantidad
 
 
 def pregunta_02():
@@ -33,7 +35,9 @@ def pregunta_02():
     4
 
     """
-    return
+    cantidad = tbl0.shape[1]
+
+    return cantidad
 
 
 def pregunta_03():
@@ -50,7 +54,9 @@ def pregunta_03():
     Name: _c1, dtype: int64
 
     """
-    return
+    rta = tbl0['_c1'].value_counts().sort_index()
+
+    return rta
 
 
 def pregunta_04():
@@ -65,7 +71,9 @@ def pregunta_04():
     E    4.785714
     Name: _c2, dtype: float64
     """
-    return
+    rta = tbl0.groupby('_c1')['_c2'].mean()
+    
+    return rta
 
 
 def pregunta_05():
@@ -82,7 +90,9 @@ def pregunta_05():
     E    9
     Name: _c2, dtype: int64
     """
-    return
+    rta = tbl0.groupby('_c1')['_c2'].max()
+    
+    return rta
 
 
 def pregunta_06():
@@ -94,7 +104,10 @@ def pregunta_06():
     ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 
     """
-    return
+    unicos = tbl1['_c4'].str.upper().unique()
+    unicos.sort()
+
+    return list(unicos)
 
 
 def pregunta_07():
