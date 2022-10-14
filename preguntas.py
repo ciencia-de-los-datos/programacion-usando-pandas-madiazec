@@ -182,7 +182,10 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+    ans = tbl0.sort_values('_c2')
+    ans['_c2'] = ans['_c2'].astype(str)
+    ans = ans.groupby('_c1').agg({'_c2':':'.join})
+    return ans
 
 
 def pregunta_11():
@@ -201,7 +204,11 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    ans = tbl1.sort_values('_c4')
+    ans['_c4'] = ans['_c4'].astype(str)
+    ans = ans.groupby(['_c0'], as_index= False).agg({'_c4':','.join})
+    
+    return ans
 
 
 def pregunta_12():
@@ -219,7 +226,11 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    valores = [(i[1] + ':' + str(i[2])) for i in tbl2.values]
+    nuevo = tbl2.assign(_c5 = valores)
+    nuevo = nuevo.sort_values('_c5')
+    ans = nuevo.groupby(['_c0'], as_index= False).agg({'_c5': ','.join})
+    return ans
 
 
 def pregunta_13():
@@ -236,4 +247,6 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    ans = pd.merge(tbl0,tbl2, how = 'right', on = '_c0')
+    ans = ans.groupby('_c1')['_c5b'].sum()
+    return ans
